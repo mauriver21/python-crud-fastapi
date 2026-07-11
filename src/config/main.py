@@ -11,21 +11,13 @@ ENV_FILE_NAMES = {
     "production": ".env.prod",
 }
 ENV_FILE_NAME = ENV_FILE_NAMES.get(ENVIRONMENT, ".env.dev")
-ENV_PATH = Path(__file__).resolve().parents[2] / ENV_FILE_NAME
+ENV_PATH = Path(__file__).resolve().parents[1] / ENV_FILE_NAME
 
 load_dotenv(ENV_PATH)
 
-
-def _split_csv(value: str | None) -> list[str]:
-    if not value:
-        return []
-
-    return [item.strip() for item in value.split(",") if item.strip()]
-
-
 config: dict[str, Any] = {
     "environment": ENVIRONMENT,
-    "allowedOrigins": _split_csv(os.getenv("ALLOWED_ORIGINS")),
+    "allowedOrigins": os.getenv("ALLOWED_ORIGINS").split(","),
     "port": int(os.getenv("PORT", "3000")),
     "jwtExpiresIn": "8h",
     "jwtSecretKey": os.getenv("JWT_SECRET_KEY"),
