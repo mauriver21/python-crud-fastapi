@@ -3,97 +3,108 @@ from __future__ import annotations
 from datetime import datetime, timezone
 from math import ceil
 from typing import Any
-from uuid import uuid4
+from uuid import UUID
 
-from pydantic import BaseModel, ConfigDict, Field
+from sqlmodel import SQLModel, Session, create_engine, select
+
+from config.main import config
+from db.schema.users import User
+from interfaces.UserCreate import UserCreate
+from interfaces.UserModelList import UserModelList
+from interfaces.UserPagination import UserPagination
+from interfaces.UserUpdate import UserUpdate
 
 
 def _utc_now() -> datetime:
     return datetime.now(timezone.utc)
 
 
-class UserBase(BaseModel):
-    email: str
-    first_name: str | None = None
-    last_name: str | None = None
+def _build_database_url() -> str:
+    db_config = config["db"]
+    dialect = db_config["dialect"]
+
+    if dialect == "sqlite":
+        return f"sqlite:///{db_config['database']}"
+
+    return (
+        f"{dialect}://{db_config['user']}:{db_config['password']}"
+        f"@{db_config['host']}:{db_config['port']}/{db_config['database']}"
+    )
 
 
-class UserCreate(UserBase):
-    password: str
-
-
-class UserUpdate(BaseModel):
-    email: str | None = None
-    first_name: str | None = None
-    last_name: str | None = None
-    password: str | None = None
-
-
-class User(UserBase):
-    id: str = Field(default_factory=lambda: str(uuid4()))
-    password: str
-    created_at: datetime = Field(default_factory=_utc_now)
-    updated_at: datetime = Field(default_factory=_utc_now)
-    deleted_at: datetime | None = None
-
-    model_config = ConfigDict(from_attributes=True)
-
-
-class UserPagination(BaseModel):
-    total_pages: int
-    size: int
-    page: int
-    total_elements: int
-
-
-class UserModelList(BaseModel):
-    data: list[User]
-    pagination: UserPagination
+def _get_engine():
+    return create_engine(_build_database_url(), echo=False)
 
 
 def create_user_model() -> dict[str, Any]:
-    users: dict[str, User] = {}
+    engine = _get_engine()
+    SQLModel.metadata.create_all(engine)
 
     async def create(user: UserCreate) -> User:
-        data = User(**user.model_dump())
-        users[data.id] = data
-        return data
+        with Session(engine) as session:
+            data = User(**user.model_dump())
+            session.add(data)
+            session.commit()
+            session.refresh(data)
+            return data
 
     async def read(user_id: str) -> User | None:
-        return users.get(user_id)
+        with Session(engine) as session:
+            statement = select(User).where(User.id == UUID(user_id))
+            return session.exec(statement).first()
 
     async def find_by_email(email: str) -> User | None:
-        for user in users.values():
-            if user.email == email and user.deleted_at is None:
-                return user
-        return None
+        with Session(engine) as session:
+            statement = select(User).where(
+                User.email == email,
+                User.deleted_at.is_(None),
+            )
+            return session.exec(statement).first()
 
     async def update(user_id: str, updates: UserUpdate) -> User | None:
-        current_user = users.get(user_id)
-        if current_user is None:
-            return None
+        with Session(engine) as session:
+            statement = select(User).where(User.id == UUID(user_id))
+            data = session.exec(statement).first()
+            if data is None:
+                return None
 
-        update_data = updates.model_dump(exclude_unset=True)
-        updated_user = current_user.model_copy(
-            update={**update_data, "updated_at": _utc_now()}
-        )
-        users[user_id] = updated_user
-        return updated_user
+            for key, value in updates.model_dump(exclude_unset=True).items():
+                setattr(data, key, value)
+
+            data.updated_at = _utc_now()
+            session.add(data)
+            session.commit()
+            session.refresh(data)
+            return data
 
     async def logical_delete(user_id: str) -> User | None:
-        current_user = users.get(user_id)
-        if current_user is None:
-            return None
+        with Session(engine) as session:
+            statement = select(User).where(User.id == UUID(user_id))
+            data = session.exec(statement).first()
+            if data is None:
+                return None
 
-        deleted_user = current_user.model_copy(update={"deleted_at": _utc_now()})
-        users[user_id] = deleted_user
-        return deleted_user
+            data.deleted_at = _utc_now()
+            session.add(data)
+            session.commit()
+            session.refresh(data)
+            return data
 
     async def list_users(page: int = 0, page_size: int = 10) -> UserModelList:
-        active_users = [user for user in users.values() if user.deleted_at is None]
         offset = page * page_size
-        data = active_users[offset : offset + page_size]
-        total_elements = len(active_users)
+
+        with Session(engine) as session:
+            statement = (
+                select(User)
+                .where(User.deleted_at.is_(None))
+                .offset(offset)
+                .limit(page_size)
+            )
+            data = list(session.exec(statement).all())
+
+            count_statement = select(User.id).where(User.deleted_at.is_(None))
+            total_elements = len(session.exec(count_statement).all())
+
         total_pages = ceil(total_elements / page_size) if page_size > 0 else 0
 
         return UserModelList(
