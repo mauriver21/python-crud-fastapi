@@ -1,7 +1,4 @@
-from sqlmodel import SQLModel
-
-
-class UserCreate(SQLModel):
+class UserCreate:
     name: str
     email: str
     password: str

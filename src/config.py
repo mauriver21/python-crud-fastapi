@@ -4,6 +4,8 @@ from typing import Any
 
 from dotenv import load_dotenv
 
+from interfaces.Config import Config
+
 ENVIRONMENT = os.getenv("NODE_ENV", "development")
 ENV_FILE_NAMES = {
     "test": ".env.test",
@@ -15,7 +17,8 @@ ENV_PATH = Path(__file__).resolve().parents[1] / ENV_FILE_NAME
 
 load_dotenv(ENV_PATH)
 
-config: dict[str, Any] = {
+
+config: Config = {
     "environment": ENVIRONMENT,
     "allowedOrigins": os.getenv("ALLOWED_ORIGINS").split(","),
     "port": int(os.getenv("PORT", "3000")),

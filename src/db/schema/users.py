@@ -1,10 +1,7 @@
 from datetime import datetime, timezone
 from uuid import UUID, uuid4
 from sqlmodel import Field, SQLModel
-
-
-def _utc_now() -> datetime:
-    return datetime.now(timezone.utc)
+from utils.utc_now import utc_now
 
 
 class User(SQLModel, table=True):
@@ -17,6 +14,6 @@ class User(SQLModel, table=True):
     email: str = Field(max_length=256)
     password: str = Field(max_length=256)
     role_id: int = Field(foreign_key="roles.id")
-    created_at: datetime = Field(default_factory=_utc_now)
-    updated_at: datetime = Field(default_factory=_utc_now)
+    created_at: datetime = Field(default_factory=utc_now)
+    updated_at: datetime = Field(default_factory=utc_now)
     deleted_at: datetime | None = Field(default=None)

@@ -1,7 +1,4 @@
-from sqlmodel import SQLModel
-
-
-class UserPagination(SQLModel):
+class UserPagination:
     total_pages: int
     size: int
     page: int
