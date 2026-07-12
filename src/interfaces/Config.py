@@ -1,7 +1,9 @@
+from typing import TypedDict
+
 from interfaces.DbConfig import DbConfig
 
 
-class Config:
+class Config(TypedDict):
     environment: str
     allowedOrigins: str
     port: int
