@@ -1,14 +1,28 @@
-def list_user():
-    return
+from interfaces.UserCreate import UserCreate
+from interfaces.UserUpdate import UserUpdate
+import models.user as user_model
 
 
-def create_user():
-    return
+def list(page: int = 0, page_size: int = 10):
+    return user_model.list(page, page_size)
 
 
-def update_user():
-    return
+def create(user: UserCreate):
+    try:
+        return user_model.create(user)
+    except Exception as error:
+        raise Exception("Failed user creation") from error
 
 
-def remove_user():
-    return
+def update(id: str, user: UserUpdate):
+    try:
+        return user_model.update(id, user)
+    except Exception as error:
+        raise Exception("Failed user updating") from error
+
+
+def logical_delete(id):
+    try:
+        return user_model.logical_delete(id)
+    except Exception as error:
+        raise Exception("Failed user removing") from error

@@ -58,7 +58,7 @@ def logical_delete(id: str) -> User | None:
         return db_user
 
 
-def list_users(page: int = 0, page_size: int = 10) -> UserModelList:
+def list(page: int = 0, page_size: int = 10) -> UserModelList:
     offset = page * page_size
 
     with Session(engine) as session:
