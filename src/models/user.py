@@ -7,7 +7,7 @@ from uuid import UUID
 
 from sqlmodel import SQLModel, Session, create_engine, select
 
-from config.main import config
+from config import config
 from db.schema.users import User
 from interfaces.UserCreate import UserCreate
 from interfaces.UserModelList import UserModelList

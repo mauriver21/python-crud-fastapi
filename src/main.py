@@ -1,7 +1,10 @@
 from fastapi import FastAPI
-from config.main import config
+from config import config
 
 app = FastAPI()
+
+print(config)
+
 
 @app.get("/")
 def read_root():

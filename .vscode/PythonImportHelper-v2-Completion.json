@@ -1,0 +1,464 @@
+[
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "timezone",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "timezone",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "UUID",
+        "importPath": "uuid",
+        "description": "uuid",
+        "isExtraImport": true,
+        "detail": "uuid",
+        "documentation": {}
+    },
+    {
+        "label": "uuid4",
+        "importPath": "uuid",
+        "description": "uuid",
+        "isExtraImport": true,
+        "detail": "uuid",
+        "documentation": {}
+    },
+    {
+        "label": "UUID",
+        "importPath": "uuid",
+        "description": "uuid",
+        "isExtraImport": true,
+        "detail": "uuid",
+        "documentation": {}
+    },
+    {
+        "label": "Field",
+        "importPath": "sqlmodel",
+        "description": "sqlmodel",
+        "isExtraImport": true,
+        "detail": "sqlmodel",
+        "documentation": {}
+    },
+    {
+        "label": "SQLModel",
+        "importPath": "sqlmodel",
+        "description": "sqlmodel",
+        "isExtraImport": true,
+        "detail": "sqlmodel",
+        "documentation": {}
+    },
+    {
+        "label": "SQLModel",
+        "importPath": "sqlmodel",
+        "description": "sqlmodel",
+        "isExtraImport": true,
+        "detail": "sqlmodel",
+        "documentation": {}
+    },
+    {
+        "label": "SQLModel",
+        "importPath": "sqlmodel",
+        "description": "sqlmodel",
+        "isExtraImport": true,
+        "detail": "sqlmodel",
+        "documentation": {}
+    },
+    {
+        "label": "SQLModel",
+        "importPath": "sqlmodel",
+        "description": "sqlmodel",
+        "isExtraImport": true,
+        "detail": "sqlmodel",
+        "documentation": {}
+    },
+    {
+        "label": "SQLModel",
+        "importPath": "sqlmodel",
+        "description": "sqlmodel",
+        "isExtraImport": true,
+        "detail": "sqlmodel",
+        "documentation": {}
+    },
+    {
+        "label": "SQLModel",
+        "importPath": "sqlmodel",
+        "description": "sqlmodel",
+        "isExtraImport": true,
+        "detail": "sqlmodel",
+        "documentation": {}
+    },
+    {
+        "label": "Session",
+        "importPath": "sqlmodel",
+        "description": "sqlmodel",
+        "isExtraImport": true,
+        "detail": "sqlmodel",
+        "documentation": {}
+    },
+    {
+        "label": "create_engine",
+        "importPath": "sqlmodel",
+        "description": "sqlmodel",
+        "isExtraImport": true,
+        "detail": "sqlmodel",
+        "documentation": {}
+    },
+    {
+        "label": "select",
+        "importPath": "sqlmodel",
+        "description": "sqlmodel",
+        "isExtraImport": true,
+        "detail": "sqlmodel",
+        "documentation": {}
+    },
+    {
+        "label": "User",
+        "importPath": "db.schema.users",
+        "description": "db.schema.users",
+        "isExtraImport": true,
+        "detail": "db.schema.users",
+        "documentation": {}
+    },
+    {
+        "label": "User",
+        "importPath": "db.schema.users",
+        "description": "db.schema.users",
+        "isExtraImport": true,
+        "detail": "db.schema.users",
+        "documentation": {}
+    },
+    {
+        "label": "UserPagination",
+        "importPath": "interfaces.UserPagination",
+        "description": "interfaces.UserPagination",
+        "isExtraImport": true,
+        "detail": "interfaces.UserPagination",
+        "documentation": {}
+    },
+    {
+        "label": "UserPagination",
+        "importPath": "interfaces.UserPagination",
+        "description": "interfaces.UserPagination",
+        "isExtraImport": true,
+        "detail": "interfaces.UserPagination",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "ceil",
+        "importPath": "math",
+        "description": "math",
+        "isExtraImport": true,
+        "detail": "math",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "config",
+        "importPath": "config",
+        "description": "config",
+        "isExtraImport": true,
+        "detail": "config",
+        "documentation": {}
+    },
+    {
+        "label": "config",
+        "importPath": "config",
+        "description": "config",
+        "isExtraImport": true,
+        "detail": "config",
+        "documentation": {}
+    },
+    {
+        "label": "UserCreate",
+        "importPath": "interfaces.UserCreate",
+        "description": "interfaces.UserCreate",
+        "isExtraImport": true,
+        "detail": "interfaces.UserCreate",
+        "documentation": {}
+    },
+    {
+        "label": "UserModelList",
+        "importPath": "interfaces.UserModelList",
+        "description": "interfaces.UserModelList",
+        "isExtraImport": true,
+        "detail": "interfaces.UserModelList",
+        "documentation": {}
+    },
+    {
+        "label": "UserUpdate",
+        "importPath": "interfaces.UserUpdate",
+        "description": "interfaces.UserUpdate",
+        "isExtraImport": true,
+        "detail": "interfaces.UserUpdate",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "load_dotenv",
+        "importPath": "dotenv",
+        "description": "dotenv",
+        "isExtraImport": true,
+        "detail": "dotenv",
+        "documentation": {}
+    },
+    {
+        "label": "FastAPI",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "list_user",
+        "kind": 2,
+        "importPath": "src.controllers.user",
+        "description": "src.controllers.user",
+        "peekOfCode": "def list_user():\n    return\ndef create_user():\n    return\ndef update_user():\n    return\ndef remove_user():\n    return",
+        "detail": "src.controllers.user",
+        "documentation": {}
+    },
+    {
+        "label": "create_user",
+        "kind": 2,
+        "importPath": "src.controllers.user",
+        "description": "src.controllers.user",
+        "peekOfCode": "def create_user():\n    return\ndef update_user():\n    return\ndef remove_user():\n    return",
+        "detail": "src.controllers.user",
+        "documentation": {}
+    },
+    {
+        "label": "update_user",
+        "kind": 2,
+        "importPath": "src.controllers.user",
+        "description": "src.controllers.user",
+        "peekOfCode": "def update_user():\n    return\ndef remove_user():\n    return",
+        "detail": "src.controllers.user",
+        "documentation": {}
+    },
+    {
+        "label": "remove_user",
+        "kind": 2,
+        "importPath": "src.controllers.user",
+        "description": "src.controllers.user",
+        "peekOfCode": "def remove_user():\n    return",
+        "detail": "src.controllers.user",
+        "documentation": {}
+    },
+    {
+        "label": "User",
+        "kind": 6,
+        "importPath": "src.db.schema.users",
+        "description": "src.db.schema.users",
+        "peekOfCode": "class User(SQLModel, table=True):\n    __tablename__ = \"users\"\n    id: UUID = Field(\n        default_factory=uuid4,\n        primary_key=True,\n    )\n    name: str = Field(max_length=256)\n    email: str = Field(max_length=256)\n    password: str = Field(max_length=256)\n    role_id: int = Field(foreign_key=\"roles.id\")",
+        "detail": "src.db.schema.users",
+        "documentation": {}
+    },
+    {
+        "label": "UserCreate",
+        "kind": 6,
+        "importPath": "src.interfaces.UserCreate",
+        "description": "src.interfaces.UserCreate",
+        "peekOfCode": "class UserCreate(SQLModel):\n    name: str\n    email: str\n    password: str\n    role_id: int",
+        "detail": "src.interfaces.UserCreate",
+        "documentation": {}
+    },
+    {
+        "label": "UserModelList",
+        "kind": 6,
+        "importPath": "src.interfaces.UserModelList",
+        "description": "src.interfaces.UserModelList",
+        "peekOfCode": "class UserModelList(SQLModel):\n    data: list[User]\n    pagination: UserPagination",
+        "detail": "src.interfaces.UserModelList",
+        "documentation": {}
+    },
+    {
+        "label": "UserPagination",
+        "kind": 6,
+        "importPath": "src.interfaces.UserPagination",
+        "description": "src.interfaces.UserPagination",
+        "peekOfCode": "class UserPagination(SQLModel):\n    total_pages: int\n    size: int\n    page: int\n    total_elements: int",
+        "detail": "src.interfaces.UserPagination",
+        "documentation": {}
+    },
+    {
+        "label": "UserUpdate",
+        "kind": 6,
+        "importPath": "src.interfaces.UserUpdate",
+        "description": "src.interfaces.UserUpdate",
+        "peekOfCode": "class UserUpdate(SQLModel):\n    name: str | None = None\n    email: str | None = None\n    password: str | None = None\n    role_id: int | None = None",
+        "detail": "src.interfaces.UserUpdate",
+        "documentation": {}
+    },
+    {
+        "label": "create_user_model",
+        "kind": 2,
+        "importPath": "src.models.user",
+        "description": "src.models.user",
+        "peekOfCode": "def create_user_model() -> dict[str, Any]:\n    engine = _get_engine()\n    SQLModel.metadata.create_all(engine)\n    async def create(user: UserCreate) -> User:\n        with Session(engine) as session:\n            data = User(**user.model_dump())\n            session.add(data)\n            session.commit()\n            session.refresh(data)\n            return data",
+        "detail": "src.models.user",
+        "documentation": {}
+    },
+    {
+        "label": "list_user",
+        "kind": 2,
+        "importPath": "src.repositories.user",
+        "description": "src.repositories.user",
+        "peekOfCode": "def list_user():\n    return\ndef create_user():\n    return\ndef update_user():\n    return\ndef remove_user():\n    return",
+        "detail": "src.repositories.user",
+        "documentation": {}
+    },
+    {
+        "label": "create_user",
+        "kind": 2,
+        "importPath": "src.repositories.user",
+        "description": "src.repositories.user",
+        "peekOfCode": "def create_user():\n    return\ndef update_user():\n    return\ndef remove_user():\n    return",
+        "detail": "src.repositories.user",
+        "documentation": {}
+    },
+    {
+        "label": "update_user",
+        "kind": 2,
+        "importPath": "src.repositories.user",
+        "description": "src.repositories.user",
+        "peekOfCode": "def update_user():\n    return\ndef remove_user():\n    return",
+        "detail": "src.repositories.user",
+        "documentation": {}
+    },
+    {
+        "label": "remove_user",
+        "kind": 2,
+        "importPath": "src.repositories.user",
+        "description": "src.repositories.user",
+        "peekOfCode": "def remove_user():\n    return",
+        "detail": "src.repositories.user",
+        "documentation": {}
+    },
+    {
+        "label": "ENVIRONMENT",
+        "kind": 5,
+        "importPath": "src.config",
+        "description": "src.config",
+        "peekOfCode": "ENVIRONMENT = os.getenv(\"NODE_ENV\", \"development\")\nENV_FILE_NAMES = {\n    \"test\": \".env.test\",\n    \"development\": \".env.dev\",\n    \"production\": \".env.prod\",\n}\nENV_FILE_NAME = ENV_FILE_NAMES.get(ENVIRONMENT, \".env.dev\")\nENV_PATH = Path(__file__).resolve().parents[1] / ENV_FILE_NAME\nload_dotenv(ENV_PATH)\nconfig: dict[str, Any] = {",
+        "detail": "src.config",
+        "documentation": {}
+    },
+    {
+        "label": "ENV_FILE_NAMES",
+        "kind": 5,
+        "importPath": "src.config",
+        "description": "src.config",
+        "peekOfCode": "ENV_FILE_NAMES = {\n    \"test\": \".env.test\",\n    \"development\": \".env.dev\",\n    \"production\": \".env.prod\",\n}\nENV_FILE_NAME = ENV_FILE_NAMES.get(ENVIRONMENT, \".env.dev\")\nENV_PATH = Path(__file__).resolve().parents[1] / ENV_FILE_NAME\nload_dotenv(ENV_PATH)\nconfig: dict[str, Any] = {\n    \"environment\": ENVIRONMENT,",
+        "detail": "src.config",
+        "documentation": {}
+    },
+    {
+        "label": "ENV_FILE_NAME",
+        "kind": 5,
+        "importPath": "src.config",
+        "description": "src.config",
+        "peekOfCode": "ENV_FILE_NAME = ENV_FILE_NAMES.get(ENVIRONMENT, \".env.dev\")\nENV_PATH = Path(__file__).resolve().parents[1] / ENV_FILE_NAME\nload_dotenv(ENV_PATH)\nconfig: dict[str, Any] = {\n    \"environment\": ENVIRONMENT,\n    \"allowedOrigins\": os.getenv(\"ALLOWED_ORIGINS\").split(\",\"),\n    \"port\": int(os.getenv(\"PORT\", \"3000\")),\n    \"jwtExpiresIn\": \"8h\",\n    \"jwtSecretKey\": os.getenv(\"JWT_SECRET_KEY\"),\n    \"diskStoragePath\": os.getenv(\"DISK_STORAGE_PATH\"),",
+        "detail": "src.config",
+        "documentation": {}
+    },
+    {
+        "label": "ENV_PATH",
+        "kind": 5,
+        "importPath": "src.config",
+        "description": "src.config",
+        "peekOfCode": "ENV_PATH = Path(__file__).resolve().parents[1] / ENV_FILE_NAME\nload_dotenv(ENV_PATH)\nconfig: dict[str, Any] = {\n    \"environment\": ENVIRONMENT,\n    \"allowedOrigins\": os.getenv(\"ALLOWED_ORIGINS\").split(\",\"),\n    \"port\": int(os.getenv(\"PORT\", \"3000\")),\n    \"jwtExpiresIn\": \"8h\",\n    \"jwtSecretKey\": os.getenv(\"JWT_SECRET_KEY\"),\n    \"diskStoragePath\": os.getenv(\"DISK_STORAGE_PATH\"),\n    \"db\": {",
+        "detail": "src.config",
+        "documentation": {}
+    },
+    {
+        "label": "read_root",
+        "kind": 2,
+        "importPath": "src.main",
+        "description": "src.main",
+        "peekOfCode": "def read_root():\n    return {\"Hello\": \"World\"}\n@app.get(\"/items/{item_id}\")\ndef read_item(item_id: int, q: str | None = None):\n    return {\"item_id\": item_id, \"q\": q}",
+        "detail": "src.main",
+        "documentation": {}
+    },
+    {
+        "label": "read_item",
+        "kind": 2,
+        "importPath": "src.main",
+        "description": "src.main",
+        "peekOfCode": "def read_item(item_id: int, q: str | None = None):\n    return {\"item_id\": item_id, \"q\": q}",
+        "detail": "src.main",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "src.main",
+        "description": "src.main",
+        "peekOfCode": "app = FastAPI()\nprint(config)\n@app.get(\"/\")\ndef read_root():\n    return {\"Hello\": \"World\"}\n@app.get(\"/items/{item_id}\")\ndef read_item(item_id: int, q: str | None = None):\n    return {\"item_id\": item_id, \"q\": q}",
+        "detail": "src.main",
+        "documentation": {}
+    }
+]
