@@ -16,12 +16,14 @@ password_hash = PasswordHash.recommended()
 
 
 def sanitize_user(user: User):
-    return user.model_dump(mode="json", exclude={"password"})
+    return user.model_dump(exclude={"password"})
 
 
 def list(page: int = 0, page_size: int = 10):
     try:
-        return user_model.list(page, page_size)
+        result = user_model.list(page, page_size)
+        result.data = [{**sanitize_user(user)} for user in result.data]
+        return result
     except Exception as error:
         raise Exception(f"[User repo] Failed user listing: {str(error)}") from error
 
