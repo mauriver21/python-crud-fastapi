@@ -1,9 +1,6 @@
 import os
-import sys
-from pathlib import Path
 
-os.environ["NODE_ENV"] = "test"
-sys.path.insert(0, str(Path(__file__).resolve().parent / "src"))
+os.environ["APP_ENV"] = "test"
 
 import pytest
 

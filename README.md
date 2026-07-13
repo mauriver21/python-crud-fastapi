@@ -1,66 +1,177 @@
 # Python CRUD REST API
 
-Minimal FastAPI project using Python 3.12, environment-based config loading, and a `src` layout.
+FastAPI REST API for user management with PostgreSQL, SQLModel, JWT
+authentication, password hashing, database migrations, and integration tests.
 
 ## Requirements
 
 - Python `3.12.6`
+- PostgreSQL
 - `pip`
 
 ## Project Structure
 
 ```text
 .
-├── .python-version
-├── requirements.txt
+├── .env.example
+├── conftest.py
+├── pyproject.toml
 ├── src
-│   ├── .env.example
-│   ├── config
-│   │   └── main.py
-│   └── main.py
-└── README.md
+│   ├── config.py
+│   ├── controllers
+│   │   ├── user.py
+│   │   └── user_test.py
+│   ├── db
+│   │   ├── engine.py
+│   │   ├── migrate.py
+│   │   ├── migrations
+│   │   └── schema
+│   ├── interfaces
+│   ├── middlewares
+│   ├── models
+│   ├── repositories
+│   ├── main.py
+│   └── routes.py
+└── tests
+    ├── constants.py
+    └── utils.py
 ```
 
 ## Setup
 
-1. Create the virtual environment:
+Create and activate a virtual environment:
 
 ```bash
 python3.12 -m venv .venv
-```
-
-2. Activate it:
-
-```bash
 source .venv/bin/activate
 ```
 
-3. Install dependencies:
+Install the project in editable mode with its testing dependencies:
 
 ```bash
-pip install -r requirements.txt
+pip install -e ".[test]"
+```
+
+Runtime dependencies, test extras, package discovery, and command-line entry
+points are defined in `pyproject.toml`.
+
+Create the development environment file:
+
+```bash
+cp .env.example .env.dev
+```
+
+Update `.env.dev` with the PostgreSQL database credentials and a secure JWT
+secret, then create the configured database.
+
+## Configuration
+
+The application reads `APP_ENV` and loads the corresponding file from the
+project root:
+
+- `development` loads `.env.dev` and is the default.
+- `test` loads `.env.test`.
+- `production` loads `.env.prod`.
+
+Available variables:
+
+```env
+ALLOWED_ORIGINS="http://localhost:3000"
+PORT="3000"
+JWT_SECRET_KEY="change-me"
+JWT_EXPIRES_IN_HOURS=8
+DISK_STORAGE_PATH="./storage"
+DB_DIALECT="postgresql"
+DB_HOST="127.0.0.1"
+DB_PORT="5434"
+DB_USER="postgres"
+DB_PASSWORD="postgres"
+DB_NAME="ecommerce"
+```
+
+Configuration is available in Python through:
+
+```python
+from config import config
+```
+
+## Database Migrations
+
+Apply all migrations to the development database:
+
+```bash
+APP_ENV=development ./.venv/bin/db-migrate upgrade
+```
+
+Other migration commands:
+
+```bash
+./.venv/bin/db-migrate list
+APP_ENV=development ./.venv/bin/db-migrate downgrade
+APP_ENV=development ./.venv/bin/db-migrate upgrade --name create_users_table
+```
+
+## Run The API
+
+Start the development server from the project root:
+
+```bash
+./.venv/bin/fastapi dev src/main.py
+```
+
+Alternatively, use Uvicorn:
+
+```bash
+./.venv/bin/python -m uvicorn main:app --reload
+```
+
+FastAPI exposes interactive API documentation at
+`http://127.0.0.1:8000/docs`.
+
+## API Endpoints
+
+| Method | Endpoint | Authentication | Description |
+| --- | --- | --- | --- |
+| `POST` | `/login` | Public | Authenticate a user and return a JWT |
+| `GET` | `/users` | Bearer token | List active users with pagination |
+| `POST` | `/users` | Bearer token | Create a user |
+| `PUT` | `/users/{id}` | Bearer token | Update a user's name or email |
+| `DELETE` | `/users/{id}` | Bearer token | Logically delete a user |
+
+The list endpoint accepts `page` and `page_size` query parameters. Protected
+endpoints require the token returned by `/login`:
+
+```http
+Authorization: Bearer <token>
+```
+
+Example login request:
+
+```bash
+curl -X POST http://127.0.0.1:8000/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"user@example.com","password":"secret"}'
 ```
 
 ## Testing
 
-The integration tests use pytest and connect to a dedicated PostgreSQL database.
-Pytest is installed with the project dependencies from `requirements.txt`.
+The tests are integration tests that exercise the FastAPI routes, JWT
+middleware, repositories, models, and a dedicated PostgreSQL test database.
 
-Create `.env.test` from the example and configure it with the test database
-connection. Do not point this file at a development or production database.
+Create and configure the test environment file. It must point to a separate
+database because test cleanup deletes user records.
 
 ```bash
 cp .env.example .env.test
 ```
 
-Create the test database, then apply the database migrations using the test
-environment:
+Create the configured test database and apply its migrations:
 
 ```bash
-NODE_ENV=test PYTHONPATH=src ./.venv/bin/python src/db/migrate.py upgrade
+APP_ENV=test ./.venv/bin/db-migrate upgrade
 ```
 
-Run all tests from the project root:
+Run the complete test suite:
 
 ```bash
 ./.venv/bin/pytest
@@ -72,86 +183,8 @@ Run only the user controller tests:
 ./.venv/bin/pytest src/controllers/user_test.py
 ```
 
-The root `conftest.py` sets `NODE_ENV=test`, adds `src` to Python's import path,
-and initializes the exclusive test user before the test session. User controller
-tests authenticate with this account. Test cleanup deletes all other records from
-the test `users` table while preserving the exclusive account.
-
-## Environment Variables
-
-The config module reads `NODE_ENV` and loads one of these files from the project root:
-
-- `development` -> `.env.dev`
-- `test` -> `.env.test`
-- `production` -> `.env.prod`
-
-Create `.env.dev` based on [`src/.env.example`](/Volumes/Mauro/Documentos/web-development/python-crud-rest-api/src/.env.example):
-
-```bash
-cp src/.env.example .env.dev
-```
-
-Available variables:
-
-```env
-ALLOWED_ORIGINS="http://localhost:3000"
-PORT="3000"
-JWT_SECRET_KEY="change-me"
-DISK_STORAGE_PATH="./storage"
-DB_DIALECT="postgresql"
-DB_HOST="127.0.0.1"
-DB_PORT="5434"
-DB_USER="postgres"
-DB_PASSWORD="postgres"
-DB_NAME="ecommerce"
-```
-
-## Run The API
-
-From the project root:
-
-```bash
-PYTHONPATH=src ./.venv/bin/fastapi dev src/main.py
-```
-
-Alternative with Uvicorn:
-
-```bash
-PYTHONPATH=src ./.venv/bin/python -m uvicorn src.main:app --reload
-```
-
-## Endpoints
-
-- `GET /`
-- `GET /items/{item_id}`
-
-Examples:
-
-```bash
-curl http://127.0.0.1:8000/
-curl "http://127.0.0.1:8000/items/1?q=test"
-```
-
-## Configuration Usage
-
-The app config is defined in [`src/config/main.py`](/Volumes/Mauro/Documentos/web-development/python-crud-rest-api/src/config/main.py).
-
-Import it with:
-
-```python
-from config.main import config
-```
-
-Example:
-
-```python
-from config.main import config
-
-print(config["environment"])
-print(config["db"]["host"])
-```
-
-## Notes
-
-- The current FastAPI app entrypoint is [`src/main.py`](/Volumes/Mauro/Documentos/web-development/python-crud-rest-api/src/main.py).
-- If you run Python from the project root, keep `PYTHONPATH=src` so imports like `from config.main import config` work.
+The editable installation makes the `src` modules importable without modifying
+`PYTHONPATH`. Pytest configuration lives in `pyproject.toml`. The root
+`conftest.py` sets `APP_ENV=test` and initializes the exclusive test user once
+per test session. Test cleanup deletes every other user while preserving that
+account.

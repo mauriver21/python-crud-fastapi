@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 from interfaces.Config import Config
 
-ENVIRONMENT = os.getenv("NODE_ENV", "development")
+ENVIRONMENT = os.getenv("APP_ENV", "development")
 ENV_FILE_NAMES = {
     "test": ".env.test",
     "development": ".env.dev",

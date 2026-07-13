@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "python-crud-rest-api"
+version = "0.1.0"
+description = "FastAPI user CRUD API with PostgreSQL and JWT authentication"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "fastapi",
+    "psycopg",
+    "pwdlib[argon2]",
+    "PyJWT",
+    "python-dotenv",
+    "sqlmodel",
+    "uvicorn",
+]
+
+[project.optional-dependencies]
+test = ["pytest"]
+
+[project.scripts]
+db-migrate = "db.migrate:main"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+py-modules = ["config", "main", "routes"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+namespaces = true
+
+[tool.pytest.ini_options]
+testpaths = ["src"]

@@ -1,7 +1,0 @@
-fastapi
-python-dotenv
-sqlmodel
-uvicorn
-psycopg
-pwdlib
-pytest

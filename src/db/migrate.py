@@ -3,18 +3,10 @@ from __future__ import annotations
 import argparse
 import importlib
 from pathlib import Path
-import sys
 
 
 MIGRATIONS_DIR = Path(__file__).resolve().parent / "migrations"
 MIGRATIONS_PACKAGE = "db.migrations"
-SRC_DIR = Path(__file__).resolve().parents[1]
-
-
-def ensure_src_on_path() -> None:
-    src_dir = str(SRC_DIR)
-    if src_dir not in sys.path:
-        sys.path.insert(0, src_dir)
 
 
 def get_migration_names() -> list[str]:
@@ -81,7 +73,6 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def main() -> None:
-    ensure_src_on_path()
     parser = build_parser()
     args = parser.parse_args()
     available = get_migration_names()
