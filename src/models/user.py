@@ -2,6 +2,8 @@ from math import ceil
 from sqlmodel import Session, func, select
 from db.engine import engine
 from db.schema.users import User
+from interfaces import UserAuthResponse
+from interfaces.UserAuth import UserAuth
 from interfaces.UserCreate import UserCreate
 from interfaces.UserModelList import UserModelList
 from interfaces.UserPagination import UserPagination

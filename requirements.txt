@@ -3,3 +3,4 @@ python-dotenv
 sqlmodel
 uvicorn
 psycopg
+pwdlib

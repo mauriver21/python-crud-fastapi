@@ -22,7 +22,7 @@ config: Config = {
     "environment": ENVIRONMENT,
     "allowedOrigins": os.getenv("ALLOWED_ORIGINS").split(","),
     "port": int(os.getenv("PORT", "3000")),
-    "jwtExpiresIn": "8h",
+    "jwtExpiresInHours": int(os.getenv("JWT_EXPIRES_IN_HOURS", "3000")),
     "jwtSecretKey": os.getenv("JWT_SECRET_KEY"),
     "diskStoragePath": os.getenv("DISK_STORAGE_PATH"),
     "db": {
