@@ -10,11 +10,13 @@ from utils.utc_now import utc_now
 
 
 def create(user: UserCreate) -> User:
+    db_user = User(**user.model_dump())
+
     with Session(engine) as session:
-        session.add(user)
+        session.add(db_user)
         session.commit()
-        session.refresh(user)
-        return user
+        session.refresh(db_user)
+        return db_user
 
 
 def read(id: str) -> User | None:
@@ -36,7 +38,10 @@ def update(id: str, user: UserUpdate) -> User | None:
         db_user = session.get(User, id)
         if db_user is None:
             return None
-        for key, value in user:
+
+        for key, value in user.model_dump(
+            exclude_unset=True, exclude_none=True
+        ).items():
             setattr(db_user, key, value)
 
         session.add(db_user)
@@ -68,9 +73,11 @@ def list(page: int = 0, page_size: int = 10) -> UserModelList:
             .offset(offset)
             .limit(page_size)
         )
-        data = list(session.exec(statement).all())
+        data = session.exec(statement).all()
 
-        count_statement = select(func.count()).select_from(User)
+        count_statement = (
+            select(func.count()).select_from(User).where(User.deleted_at.is_(None))
+        )
         total_elements = session.exec(count_statement).one()
 
     total_pages = ceil(total_elements / page_size) if page_size > 0 else 0
