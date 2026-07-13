@@ -128,30 +128,19 @@ Alternatively, use Uvicorn:
 FastAPI exposes interactive API documentation at
 `http://127.0.0.1:8000/docs`.
 
-## API Endpoints
+## Dependencies
 
-| Method | Endpoint | Authentication | Description |
-| --- | --- | --- | --- |
-| `POST` | `/login` | Public | Authenticate a user and return a JWT |
-| `GET` | `/users` | Bearer token | List active users with pagination |
-| `POST` | `/users` | Bearer token | Create a user |
-| `PUT` | `/users/{id}` | Bearer token | Update a user's name or email |
-| `DELETE` | `/users/{id}` | Bearer token | Logically delete a user |
-
-The list endpoint accepts `page` and `page_size` query parameters. Protected
-endpoints require the token returned by `/login`:
-
-```http
-Authorization: Bearer <token>
-```
-
-Example login request:
-
-```bash
-curl -X POST http://127.0.0.1:8000/login \
-  -H "Content-Type: application/json" \
-  -d '{"email":"user@example.com","password":"secret"}'
-```
+| Dependency | Purpose |
+| --- | --- |
+| `fastapi` | Defines the REST API, routes, request validation, dependency injection, and exception handling. |
+| `sqlmodel` | Defines database models and provides SQLAlchemy-based sessions and queries. |
+| `psycopg` | Connects SQLModel and SQLAlchemy to PostgreSQL. |
+| `pwdlib[argon2]` | Hashes and verifies user passwords using Argon2. |
+| `PyJWT` | Creates and validates JWT access tokens. |
+| `python-dotenv` | Loads environment-specific configuration from `.env` files. |
+| `uvicorn` | Runs the FastAPI application as an ASGI server. |
+| `pytest` | Runs the integration test suite and its session fixtures. |
+| `setuptools` | Builds the project, supports editable installation, and creates the `db-migrate` command. |
 
 ## Testing
 
