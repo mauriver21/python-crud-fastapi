@@ -1,14 +1,15 @@
 import os
-
-import pytest
-from tests.utils import initialize_test_user
+import sys
+from pathlib import Path
 
 os.environ["NODE_ENV"] = "test"
+sys.path.insert(0, str(Path(__file__).resolve().parent / "src"))
+
+import pytest
+
+from tests.utils import initialize_test_user
 
 
 @pytest.fixture(scope="session", autouse=True)
 def setup_tests():
-    initialize_test_user(
-        "controller-test@example.com",
-        "test-password",
-    )
+    initialize_test_user()

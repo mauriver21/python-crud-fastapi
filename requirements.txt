@@ -4,3 +4,4 @@ sqlmodel
 uvicorn
 psycopg
 pwdlib
+pytest

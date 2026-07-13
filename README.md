@@ -41,6 +41,42 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
+## Testing
+
+The integration tests use pytest and connect to a dedicated PostgreSQL database.
+Pytest is installed with the project dependencies from `requirements.txt`.
+
+Create `.env.test` from the example and configure it with the test database
+connection. Do not point this file at a development or production database.
+
+```bash
+cp .env.example .env.test
+```
+
+Create the test database, then apply the database migrations using the test
+environment:
+
+```bash
+NODE_ENV=test PYTHONPATH=src ./.venv/bin/python src/db/migrate.py upgrade
+```
+
+Run all tests from the project root:
+
+```bash
+./.venv/bin/pytest
+```
+
+Run only the user controller tests:
+
+```bash
+./.venv/bin/pytest src/controllers/user_test.py
+```
+
+The root `conftest.py` sets `NODE_ENV=test`, adds `src` to Python's import path,
+and initializes the exclusive test user before the test session. User controller
+tests authenticate with this account. Test cleanup deletes all other records from
+the test `users` table while preserving the exclusive account.
+
 ## Environment Variables
 
 The config module reads `NODE_ENV` and loads one of these files from the project root:
