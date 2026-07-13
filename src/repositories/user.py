@@ -16,7 +16,7 @@ password_hash = PasswordHash.recommended()
 
 
 def sanitize_user(user: User):
-    return user.model_dump({"password"})
+    return user.model_dump(mode="json", exclude={"password"})
 
 
 def list(page: int = 0, page_size: int = 10):
@@ -49,16 +49,9 @@ def logical_delete(id: str):
         raise Exception(f"[User repo] Failed user removing: {str(error)}") from error
 
 
-def find_by_email(email: str):
-    try:
-        return sanitize_user(user_model.find_by_email(email))
-    except Exception as error:
-        raise Exception(f"[User repo] User not found by email: {str(error)}") from error
-
-
 def login(auth: UserAuth) -> UserAuthResponse:
     try:
-        found_user = find_by_email(auth["email"])
+        found_user = user_model.find_by_email(auth["email"])
         if found_user is None:
             raise Exception("The user is not registered")
 
@@ -66,17 +59,22 @@ def login(auth: UserAuth) -> UserAuthResponse:
         if verified is False:
             raise Exception("Invalid password")
 
-        to_encode = found_user.copy()
+        user = sanitize_user(found_user)
+        to_encode = user.copy()
         to_encode.update(
-            {"exp": utc_now() + timedelta(hours=config["jwtExpiresInHours"])}
+            {
+                "exp": (
+                    utc_now() + timedelta(hours=config["jwtExpiresInHours"])
+                ).timestamp()
+            }
         )
 
         token = jwt.encode(
-            found_user,
+            to_encode,
             config["jwtSecretKey"],
             algorithm="HS256",
         )
 
-        return {"token": token, "user": found_user}
+        return {"token": token, "user": user}
     except Exception as error:
         raise Exception(f"[User repo] User login failed: {str(error)}") from error
